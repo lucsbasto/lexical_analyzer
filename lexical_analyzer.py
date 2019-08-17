@@ -1,4 +1,4 @@
-import json
+ import json
 
 input = open('arquivo.txt', 'r')
 linha = input.read()
@@ -6,7 +6,6 @@ token = ""
 palavraReservadas = ['while', 'do']
 operadores = ['<', '=', '+']
 terminador = [';']
-numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 identificadores = ['i','j']
 tokens = []
 erros = []
