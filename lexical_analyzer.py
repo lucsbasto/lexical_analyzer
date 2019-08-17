@@ -1,4 +1,4 @@
- import json
+import json
 
 input = open('arquivo.txt', 'r')
 linha = input.read()
@@ -8,7 +8,9 @@ operadores = ['<', '=', '+']
 terminador = [';']
 identificadores = ['i','j']
 tokens = []
+simbolos = []
 erros = []
+indice = 1
 for i in range(len(linha)):
     if(linha[i] is not " "):
         token += linha[i]
@@ -32,6 +34,10 @@ for i in range(len(linha)):
             token = ""
 
         elif(token in identificadores):
+            simbolos.append({
+                "indice": indice,
+                "simbolo": ("({})".format(token))
+            })
             tokens.append({
                 "token": token,
                 "identificacao": "identificador",
@@ -39,8 +45,12 @@ for i in range(len(linha)):
                 "posicao": ("({},{})".format(0, i - len(token)))
             })
             token = ""
-
+            indice+=1
         elif (token.isdigit() and len(token) == 1):
+            simbolos.append({
+                "indice": indice,
+                "simbolo": ("({})".format(token))
+            })
             tokens.append({
                 "token": token,
                 "identificacao": "numero",
@@ -48,8 +58,12 @@ for i in range(len(linha)):
                 "posicao": ("({},{})".format(0, i - len(token)))
             })
             token = ""
-
+            indice+=1
         elif (token.isdigit() and len(token) > 1):
+            simbolos.append({
+                "indice": indice,
+                "simbolo": ("({})".format(token))
+            })
             tokens.append({
                 "token": token,
                 "identificacao": "constante",
@@ -57,6 +71,7 @@ for i in range(len(linha)):
                 "posicao": ("({},{})".format(0, i - len(token)))
             })
             token = ""
+            indice+=1
         else:
             erros.append({
                 "token": token,
@@ -84,6 +99,12 @@ with open('output.txt', 'w+') as output:
 
     output.write("erros: {\n")
     for i in erros:
+        ij = json.dumps(i)
+        output.write(ij + ",\n")
+    output.write("}\n")
+
+    output.write("simbolos: {\n")
+    for i in simbolos:
         ij = json.dumps(i)
         output.write(ij + ",\n")
     output.write("}")
