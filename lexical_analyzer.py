@@ -12,7 +12,7 @@ erros = []
 for i in range(len(linha)):
     if(linha[i] is not " "):
         token += linha[i]
-    if(linha[i] is " "):
+    elif(linha[i] is " "):
         if(token in palavraReservadas):
             tokens.append({
                 "token": token,
@@ -22,7 +22,7 @@ for i in range(len(linha)):
             })
             token = ""
 
-        if(token in operadores):
+        elif(token in operadores):
             tokens.append({
                 "token": token,
                 "identificacao": "operador",
@@ -31,7 +31,7 @@ for i in range(len(linha)):
             })
             token = ""
 
-        if(token in identificadores):
+        elif(token in identificadores):
             tokens.append({
                 "token": token,
                 "identificacao": "identificador",
@@ -40,7 +40,7 @@ for i in range(len(linha)):
             })
             token = ""
 
-        if (token.isdigit() and len(token) == 1):
+        elif (token.isdigit() and len(token) == 1):
             tokens.append({
                 "token": token,
                 "identificacao": "numero",
@@ -49,7 +49,7 @@ for i in range(len(linha)):
             })
             token = ""
 
-        if (token.isdigit() and len(token) > 1):
+        elif (token.isdigit() and len(token) > 1):
             tokens.append({
                 "token": token,
                 "identificacao": "constante",
@@ -64,7 +64,7 @@ for i in range(len(linha)):
             })
         token = ""
 
-    if(token in terminador):
+    elif(token in terminador):
         tokens.append({
             "token": token,
             "identificacao": "terminador",
@@ -89,4 +89,3 @@ with open('output.txt', 'w+') as output:
     output.write("}")
 
 output.close()
-
