@@ -68,7 +68,7 @@ while i < 100 do i = i + j;
 | i     | identificador     | 1       | (0,21)                    |
 | +     | operador          | 1       | (0,23)                    |
 
-## Tabela de símbolos
+### Tabela de símbolos
 
 |indice|simbolo|
 |------|-------|
@@ -77,7 +77,7 @@ while i < 100 do i = i + j;
 |3     |(i)    |
 |4     |(i)    |
 
-## Tabela de erros 
+### Tabela de erros 
 
 |token|posicao|
 |-----|-------|
@@ -99,7 +99,7 @@ while i < 100 do i = i + j;
 | i     | identificador     | 1       | (0,19)                    |
 | +     | operador          | 1       | (0,21)                    |
 
-## Tabela de símbolos
+### Tabela de símbolos
 
 |indice|simbolo|
 |------|-------|
@@ -108,7 +108,7 @@ while i < 100 do i = i + j;
 |3     |(i)    |
 |4     |(i)    |
 
-## Tabela de erros 
+### Tabela de erros 
 
 |token|posicao|
 |-----|-------|
