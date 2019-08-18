@@ -48,11 +48,10 @@ No caso de haver **erro**, a saída do scanner deve ter *tokens* e **símbolos**
         * o token precisa ser do tipo numérico e ter o tamanho igual a 1
     * constante
         * o token precisa ser do tipo numerico e ter o tamanho maior que 1
-        
+
 ##  Estrutura do parser e como ele funciona 
 
-Este parser foi estruturado com uma variável e um laço de repetição para analisar os dados adicionados em um arquivo.  A repetição é feita em cada elemento da variavel linha, que contém o conteúdo do arquivo, e a variavel, que na implementação está nomeada como *token* concatena o valor dela com o valor desse elemento e
-a cada passo é feito uma verificação para descobrir se o token formado pelos elementos presentes na variável *token* é um token da linguagem e identificando esses tokens com base nas listas de palavraReservadas, operadores e identificadores definidas previamente.
+Este parser foi estruturado com uma variável e um laço de repetição para analisar os dados adicionados em um arquivo.  A repetição é feita em cada elemento da variavel *linha*, que contém o conteúdo do arquivo, e a variavel, que na implementação está nomeada como *token*, concatena o valor dela com o valor desse elemento. A cada passo é feito uma verificação para descobrir se o token formado pelos elementos presentes na variável *token* é um token da linguagem e identificando esses tokens com base nas listas de palavraReservadas, operadores e identificadores definidas previamente.
 
 ```python
 if (token in palavraReservadas):
