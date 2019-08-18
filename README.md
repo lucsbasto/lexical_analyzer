@@ -7,22 +7,16 @@ Características importantes do scanner:
 * o scanner pode ser implementado em qualquer linguagem/plataforma
 * a saída do scanner deve ser um arquivo JSON, contendo a tabela de tokens, a tabela de símbolos e um possível erro encontrado durante a análise
 
-A tabela de tokens deve armazenar: o token, a identificação do token, tamanho do token e a posição (linha e coluna).
+A tabela de ***tokens*** deve armazenar: o *token*, sua identificação, tamanho e a posição (linha e coluna).
 
-A tabela de símbolos deve armazenar o índice e o símbolo.
+A tabela de **símbolos** deve armazenar o índice e o símbolo.
 
-O erro deve ter: uma mensagem textual, o token e a posição (linha e coluna).
+O **erro** deve ter: uma mensagem textual, o *token* e a posição (linha e coluna).
 
-No caso de haver erro, a saída do scanner deve ter tokens e símbolos até a existência do erro (além da informação do erro.
+No caso de haver **erro**, a saída do scanner deve ter *tokens* e **símbolos** até a existência do **erro**.
 
 # Documentação
-
-Crie um documento que descreva o trabalho do parser, considerando:
-* descreva o processo de criação do parser (quais foram as etapas e como elas foram conduzidas?)
-* descreva a estrutura do parser e como ele funciona
-* exemplifique o funcionamento do parser (defina um exemplo de código-fonte, utilize o parser e apresente a saída, ou seja, as tabelas de tokens e de símbolos -- não apresente em formato JSON)
-
-# Processo de Criação do Parser
+## Processo de Criação do Parser
 
 * Definição da tabela de tokens
     * Palavras Reservadas
@@ -30,7 +24,19 @@ Crie um documento que descreva o trabalho do parser, considerando:
     * Terminadores
     * Numeros
     * Identificadores
+    ### Implementação
+    ```python
+   palavraReservadas = ['while', 'do']
+   operadores = ['<', '=', '+']
+   terminador = [';']
+   numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+   identificadores = ['i','j']
+    ```
 * Leitura do arquivo que contém o texto
+```python
+   input = open('arquivo.txt', 'r')
+   linha = input.read()
+```
 * Percorrendo o arquivo que contem o texto verificando se o token é uma:
     * palavra reservada
         * o token precisa estar presente na lista de palavras reservadas
@@ -42,3 +48,68 @@ Crie um documento que descreva o trabalho do parser, considerando:
         * o token precisa ser do tipo numérico e ter o tamanho igual a 1
     * constante
         * o token precisa ser do tipo numerico e ter o tamanho maior que 1
+##  Estrutura do parser e como ele funciona 
+
+### Tablea de tokens execução sem erros
+* Entrada 
+```
+while i < 100 do i = i + j;
+```
+
+| token | identificação     | tamanho | Posição (*linha, coluna*) |
+|-------|-------------------|---------|---------------------------|
+| while | palavra reservada | 5       | (0,0)                     |
+| i     | identificador     | 1       | (0,6)                     |
+| <     | operador          | 1       | (0,8)                     |
+| 100   | constante         | 3       | (0,10)                    |
+| do    | palavra reservada | 2       | (0,14)                    |
+| i     | identificador     | 1       | (0,17)                    |
+| =     | operador          | 1       | (0,19)                    |
+| i     | identificador     | 1       | (0,21)                    |
+| +     | operador          | 1       | (0,23)                    |
+
+## Tabela de símbolos
+
+|indice|simbolo|
+|------|-------|
+|1     |(i)    |
+|2     |(100)  |
+|3     |(i)    |
+|4     |(i)    |
+
+## Tabela de erros 
+
+|token|posicao|
+|-----|-------|
+|     |       |
+### Tablea de tokens execução com erro
+* Entrada 
+```
+while i < 100 do i = i + j;
+```
+
+| token | identificação     | tamanho | Posição (*linha, coluna*) |
+|-------|-------------------|---------|---------------------------|
+| i     | identificador     | 1       | (0,4)                     |
+| <     | operador          | 1       | (0,6)                     |
+| 100   | constante         | 3       | (0,8)                     |
+| do    | palavra reservada | 2       | (0,12)                    |
+| i     | identificador     | 1       | (0,15)                    |
+| =     | operador          | 1       | (0,17)                    |
+| i     | identificador     | 1       | (0,19)                    |
+| +     | operador          | 1       | (0,21)                    |
+
+## Tabela de símbolos
+
+|indice|simbolo|
+|------|-------|
+|1     |(i)    |
+|2     |(100)  |
+|3     |(i)    |
+|4     |(i)    |
+
+## Tabela de erros 
+
+|token|posicao|
+|-----|-------|
+| for | (0,0) |
