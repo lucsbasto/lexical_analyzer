@@ -48,9 +48,24 @@ No caso de haver **erro**, a saída do scanner deve ter *tokens* e **símbolos**
         * o token precisa ser do tipo numérico e ter o tamanho igual a 1
     * constante
         * o token precisa ser do tipo numerico e ter o tamanho maior que 1
+        
 ##  Estrutura do parser e como ele funciona 
 
-### Tablea de tokens execução sem erros
+Este parser foi estruturado com uma variável e um laço de repetição para analisar os dados adicionados em um arquivo.  A repetição é feita em cada elemento da variavel linha, que contém o conteúdo do arquivo, e a variavel, que na implementação está nomeada como *token* concatena o valor dela com o valor desse elemento e
+a cada passo é feito uma verificação para descobrir se o token formado pelos elementos presentes na variável *token* é um token da linguagem e identificando esses tokens com base nas listas de palavraReservadas, operadores e identificadores definidas previamente.
+
+```python
+if (token in palavraReservadas):
+    tokens.append({
+        "token": token,
+        "identificacao": "palavra reservada",
+        "tamanho": len(token),
+        "posicao": ('({},{})'.format(0, i - len(token)))
+    })
+```
+
+
+### Tabela de tokens execução sem erros
 * Entrada 
 ```
 while i < 100 do i = i + j;
@@ -67,6 +82,9 @@ while i < 100 do i = i + j;
 | =     | operador          | 1       | (0,19)                    |
 | i     | identificador     | 1       | (0,21)                    |
 | +     | operador          | 1       | (0,23)                    |
+| j     | identificador     | 1       | (0,25)                    |
+| ;     | terminador        | 1       | (0,26)                    |
+
 
 ### Tabela de símbolos
 
@@ -82,22 +100,25 @@ while i < 100 do i = i + j;
 |token|posicao|
 |-----|-------|
 |     |       |
+
 ### Tablea de tokens execução com erro
 * Entrada 
 ```
-while i < 100 do i = i + j;
+while i < 100 do i = i + for;
 ```
 
 | token | identificação     | tamanho | Posição (*linha, coluna*) |
 |-------|-------------------|---------|---------------------------|
-| i     | identificador     | 1       | (0,4)                     |
-| <     | operador          | 1       | (0,6)                     |
-| 100   | constante         | 3       | (0,8)                     |
-| do    | palavra reservada | 2       | (0,12)                    |
-| i     | identificador     | 1       | (0,15)                    |
-| =     | operador          | 1       | (0,17)                    |
-| i     | identificador     | 1       | (0,19)                    |
-| +     | operador          | 1       | (0,21)                    |
+| while | palavra reservada | 5       | (0,0)                     |
+| i     | identificador     | 1       | (0,6)                     |
+| <     | operador          | 1       | (0,8)                     |
+| 100   | constante         | 3       | (0,10)                    |
+| do    | palavra reservada | 2       | (0,14)                    |
+| i     | identificador     | 1       | (0,17)                    |
+| =     | operador          | 1       | (0,19)                    |
+| i     | identificador     | 1       | (0,21)                    |
+| +     | operador          | 1       | (0,23)                    |
+
 
 ### Tabela de símbolos
 
@@ -112,4 +133,4 @@ while i < 100 do i = i + j;
 
 |token|posicao|
 |-----|-------|
-| for | (0,0) |
+| for | (0,25) |
